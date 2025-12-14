@@ -22,19 +22,11 @@ endif()
 
 # https://vcpkg.io/en/docs/examples/manifest-mode-cmake.html
 
-add_executable(${PROJECT_NAME}
-  src/main.cc src/main.h)
-
-# Confirm strictly to C++20.
-# https://cliutils.gitlab.io/modern-cmake/chapters/features/cpp11.html
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
-set_target_properties(${PROJECT_NAME} PROPERTIES
-  CXX_EXTENSIONS OFF
-  CXX_STANDARD_REQUIRED ON)
-
-# Find and include third-party libraries here
-find_package(FLTK CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE
-  fltk fltk_images
-  spdlog::spdlog_header_only)
+# Add subdirectories
+add_subdirectory(day1)
+add_subdirectory(day2)
+add_subdirectory(day3)
+add_subdirectory(day4)
+add_subdirectory(day5)
+add_subdirectory(day6)
+add_subdirectory(day7)

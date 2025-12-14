@@ -1,7 +1,8 @@
-# C++ executable using CMake + vcpkg
+# Advent of Code Solutions - C++ using CMake + vcpkg
 
+This is a fork of [cpp-vcpkg-seed](https://github.com/legends2k/cpp-vcpkg-seed) adapted for Advent of Code solutions.
 Cross-platform, cross-toolchain C++ project using CMake as meta-build system and
-vcpkg as package manager.  Useful as seed to germinate further projects from.
+vcpkg as package manager for solving Advent of Code puzzles.
 
 # Tools
 
@@ -22,16 +23,18 @@ displays the version properly.
 Make sure `VCPKG_ROOT` is set correctly depending on how you set it up.
 
 ``` shell
-git clone https://github.com/legends2k/cpp-vcpkg-seed
+git clone --recursive https://github.com/vineethkuttan/advent-of-code-2025.git
 
-cd cpp-vcpkg-seed
+cd advent-of-code-2025
 
-cmake -B build -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+cmake -B build -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
 
 cmake --build build
 ```
 
-This should build the `seed` executable under `//build`.
+This should build the day executables under `//build/dayX/Debug/` (or `//build/dayX/Release/` for release builds).
+
+Each day's CMakeLists.txt is configured to automatically copy the corresponding input.txt file from `aoc-questions-inputs/2025/dayX/` to the build directory.
 
 ## IDE
 
@@ -50,19 +53,27 @@ refer `cmake --help` for details.
 
 # Dependencies
 
-Project dependencies are listed in `vcpkg.json` manifest.  Add/Remove libraries
-as needed. Check [available packages in vcpkg][packages] when doing it.  By
-default [fltk][] and [spdlog][] are listed as dependencies for GUI programming
-and logging.
+This Advent of Code project currently has no external dependencies and uses only standard C++ libraries. 
+The `vcpkg.json` manifest is included for future use if you need additional libraries for complex solutions.
 
-``` shell
-  "dependencies": [
-    "spdlog",
-    "fltk"
-  ]
+```json
+{
+  "dependencies": []
+}
 ```
 
+You can add packages as needed for specific problems (e.g., graph libraries, regex, or visualization tools).
+Check [available packages in vcpkg][packages] when adding dependencies.
+
 Refer [vcpkg manifest documentation][] for details.
+
+# Project Structure
+
+Each day's solution is organized in its own folder:
+- `dayX/` - Contains the C++ source files (`dayX.cpp`, `dayX.h`) and CMakeLists.txt
+- `aoc-questions-inputs/2025/dayX/` - Contains the puzzle input (`input.txt`)
+
+The build system automatically copies input files to the appropriate build directories.
 
 
 # References
